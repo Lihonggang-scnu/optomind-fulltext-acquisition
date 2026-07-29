@@ -1,0 +1,6 @@
+# Local secrets, browser state and downloaded papers must never be published.
+secrets/*.txt
+!secrets/README.md
+workspace/
+__pycache__/
+.pytest_cache/
