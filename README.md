@@ -17,7 +17,7 @@
 
 文献元数据 API 能告诉智能体“有这篇论文”，却往往不能可靠地提供可用全文。出版社页面可能只是摘要、付费预览、登录页，也可能需要从学校代理入口访问。
 
-本项目的目标不是“尽量下载到任何长网页”，而是让系统明确判断：**拿到的是可用全文、仅是元数据页，还是需要人工补充操作。**
+本项目的目标是让系统明确判断：**拿到的是可用全文、仅是元数据页，还是需要人工补充操作。**
 
 ```text
 论文元数据
@@ -176,37 +176,6 @@ workspace/downloads/<paper-id>/
 
 ---
 
-## ⚙️ 本地配置与安全
-
-可通过环境变量或被 Git 忽略的 `secrets/` 目录提供可选配置：
-
-```text
-UNPAYWALL_EMAIL=you@example.edu
-OPENALEX_API_KEYS=key-one,key-two
-INSTITUTION_LOGIN_URL=https://library.example.edu/login
-INSTITUTION_PROXY_TEMPLATE=https://{host_dash}-s.proxy.example.edu{path_query}
-```
-
-详见 [`secrets/README.md`](secrets/README.md)。
-
-🔒 **严禁提交** API key、学校账号密码、浏览器 Cookie、下载论文或浏览器 profile。虽然 `.gitignore` 已默认排除这些内容，发布前仍应执行：
-
-```powershell
-git status
-```
-
----
-
-## ✅ 测试
-
-```powershell
-py -3.11 -m pytest tests -q
-py -3.11 cli.py --check-session
-```
-
-单元测试不联网。若要做真实冒烟测试，建议先使用一篇 OA 文献，并仅获取你有权访问的内容。
-
----
 
 ## ⚖️ 使用边界与合规性
 
@@ -215,9 +184,9 @@ py -3.11 cli.py --check-session
 - ✅ 合法 OA 资源；
 - ✅ 用户本人已获授权的学校/机构访问；
 - ✅ 用户手动保存的合法文件；
-- ❌ 不绕过付费墙；
+- ❌ 不绕过付费；
 - ❌ 不处理 CAPTCHA；
 - ❌ 不收集密码；
 - ❌ 不进行大规模抓取或再分发版权全文。
 
-请始终遵守出版社条款、学校访问政策与所在地法律法规。
+请始终遵守出版社条款、学校访问政策与所在地法律法规，不然出了事别怪我。
